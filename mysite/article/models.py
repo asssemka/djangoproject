@@ -28,4 +28,4 @@ class Comments(models.Model):
     article = models.ForeignKey("Article", on_delete=models.PROTECT)
     user = models.ForeignKey("Users", on_delete=models.PROTECT)
     create_time = models.DateTimeField(auto_now_add=True)
-    parent_comment = models.ForeignKey("Comments", on_delete=models.PROTECT)
+    parent_comment = models.ForeignKey("Comments", on_delete=models.PROTE
