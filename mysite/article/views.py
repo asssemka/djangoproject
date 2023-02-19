@@ -4,7 +4,11 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 def index(request):
-     return HttpResponse("Страница приложения article")
+     return render(request, 'article/index.html')
+
+def about(request):
+     return render(request, 'article/about.html')
+
 
 def categories(request, catid):
      if(request.GET):

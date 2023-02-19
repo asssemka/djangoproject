@@ -8,7 +8,8 @@ class Article(models.Model):
     time_create = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
 
-
+def __str__(self):
+    return self.title
 
 class Styles(models.Model):
     style_name = models.CharField(max_length=255, db_index=True)
@@ -28,4 +29,6 @@ class Comments(models.Model):
     article = models.ForeignKey("Article", on_delete=models.PROTECT)
     user = models.ForeignKey("Users", on_delete=models.PROTECT)
     create_time = models.DateTimeField(auto_now_add=True)
-    parent_comment = models.ForeignKey("Comments", on_delete=models.PROTE
+    parent_comment = models.ForeignKey("Comments", on_delete=models.PROTECT)
+
+
