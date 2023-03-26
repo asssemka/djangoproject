@@ -7,12 +7,16 @@ class Article(models.Model):
     photo = models.ImageField(upload_to="photo/%Y/%m/%d")
     time_create = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
+    style = models.ForeignKey("Styles", on_delete=models.PROTECT)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
 
 def __str__(self):
     return self.title
 
 class Styles(models.Model):
     style_name = models.CharField(max_length=255, db_index=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True)
 
 class Users(models.Model):
     name = models.CharField(max_length=50, db_index=True)
