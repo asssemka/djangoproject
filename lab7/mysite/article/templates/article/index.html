@@ -1,0 +1,230 @@
+{% load static %}
+{% load article_tags %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Art.Design Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font awesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link type="text/css" href="{% static 'article/css/ind.css' %}" rel="stylesheet" />
+  </head>
+  <body>
+
+    <!-- header -->
+    <header>
+      <nav class = "navbar">
+        <div class = "container">
+          <a href = "index.html" class = "navbar-brand">Art&Clue</a>
+          <div class = "navbar-nav">
+            <a href = "">home</a>
+            <a href = "">design</a>
+            <a href = "">blog</a>
+            <a href = "/addpage">ADD ARTICLE</a>
+          </div>
+        </div>
+      </nav>
+      <div class = "banner">
+        <div class = "container">
+          <h1 class = "banner-title">
+            <span>Art</span> &Clue
+          </h1>
+          <p>Искусство — это человек плюс природа.</p>
+          <form>
+            <input type = "text" class = "search-input" placeholder="find your food . . .">
+            <button type = "submit" class = "search-btn">
+              <i class = "fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <!-- end of header -->
+
+<!--    &lt;!&ndash; design &ndash;&gt;-->
+<!--    <section class = "design" id = "design">-->
+<!--      <div class = "container">-->
+<!--        <div class = "title">-->
+<!--          <h2>Popular Art& style</h2>-->
+<!--          <p>recent arts & designs on the blog</p>-->
+<!--        </div>-->
+
+<!--        <div class = "design-content">-->
+<!--          &lt;!&ndash; item &ndash;&gt;-->
+<!--          <div class = "design-item">-->
+<!--            <div class = "design-img">-->
+<!--              <img src = "{% static 'article/images/star.jpg' %}" alt = "">-->
+<!--              <span><i class = "far fa-heart"></i> </span>-->
+<!--              <span>Импрессионизм</span>-->
+<!--            </div>-->
+<!--            <div class = "design-title">-->
+<!--              <a href = "#">Выдающиеся представители: К. Моне, Э. Мане, Э. Дега, А. Ренуар.</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end of item &ndash;&gt;-->
+<!--          &lt;!&ndash; item &ndash;&gt;-->
+<!--          <div class = "design-item">-->
+<!--            <div class = "design-img">-->
+<!--              <img src = "{% static 'article/images/post.jpg' %}" alt = "">-->
+<!--              <span><i class = "far fa-heart"></i> </span>-->
+<!--              <span>Постимпрессионизм</span>-->
+<!--            </div>-->
+<!--            <div class = "design-title">-->
+<!--              <a href = "#">Для постимпрессионизма характерно разнообразие творческих решений и технических средств.</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end of item &ndash;&gt;-->
+<!--          &lt;!&ndash; item &ndash;&gt;-->
+<!--          <div class = "design-item">-->
+<!--            <div class = "design-img">-->
+<!--              <img src = "{% static 'article/images/kub.jpeg' %}" alt = "">-->
+<!--              <span><i class = "far fa-heart"></i> </span>-->
+<!--              <span>Кубизм</span>-->
+<!--            </div>-->
+<!--            <div class = "design-title">-->
+<!--              <a href = "#">Представители Ж. Брак, П. Пикассо.</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end of item &ndash;&gt;-->
+<!--          &lt;!&ndash; item &ndash;&gt;-->
+<!--          <div class = "design-item">-->
+<!--            <div class = "design-img">-->
+<!--              <img src = "{% static 'article/images/sup.jpg' %}" alt = "">-->
+<!--              <span><i class = "far fa-heart"></i> </span>-->
+<!--              <span>Супрематизм</span>-->
+<!--            </div>-->
+<!--            <div class = "design-title">-->
+<!--              <a href = "#">Представители: К. Малевич, А. Экстер.</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end of item &ndash;&gt;-->
+<!--          &lt;!&ndash; item &ndash;&gt;-->
+<!--          <div class = "design-item">-->
+<!--            <div class = "design-img">-->
+<!--              <img src = "{% static 'article/images/sur.jpeg' %}" alt = "">-->
+<!--              <span><i class = "far fa-heart"></i> </span>-->
+<!--              <span>Сюрреализм</span>-->
+<!--            </div>-->
+<!--            <div class = "design-title">-->
+<!--              <a href = "#">Представители С. Дали, Р. Магритт, А. Бретон, Ф. Кало.</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end of item &ndash;&gt;-->
+<!--          &lt;!&ndash; item &ndash;&gt;-->
+<!--          <div class = "design-item">-->
+<!--            <div class = "design-img">-->
+<!--              <img src = "{% static 'article/images/undr.jpg' %}" alt = "">-->
+<!--              <span><i class = "far fa-heart"></i> </span>-->
+<!--              <span>Андеграунд</span>-->
+<!--            </div>-->
+<!--            <div class = "design-title">-->
+<!--              <a href = "#">ряд художественных направлений в современном искусстве, противопоставляющих себя массовой культуре, мейнстриму.</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          &lt;!&ndash; end of item &ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--    &lt;!&ndash; end of design &ndash;&gt;-->
+
+
+    <!-- blog -->
+    <section class = "blog" id = "blog">
+      <div class = "container">
+        <div class = "title">
+          <h2>Latest Blog</h2>
+          <p>recent blogs about art & design</p>
+        </div>
+		  {% block content %}
+        <div class = "blog-content">
+			{% for a in posts %}
+          <!-- item -->
+          <div class = "blog-item">
+            <div class = "blog-img">
+              <img src = "{{a.photo.url}}" alt = "">
+              <span><i class = "far fa-heart"></i></span>
+            </div>
+            <div class = "blog-text">
+              <span>{{a.time_create}}</span>
+              <h2>{{a.title}}</h2>
+				{% autoescape on %}
+              <p>{{a.content|linebreaks|truncatewords:50}}</p>
+				{% endautoescape %}
+              <a href = "{{a.get_absolute_url }}"> Read More</a>
+            </div>
+          </div>
+          <!-- end of item -->
+			{% endfor %}
+          {% if page_obj.has_other_pages %}
+<nav class="list-pages">
+    <ul>
+{% if page_obj.has_previous %}
+<li class="page-num">
+	<a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+</li>
+{% endif %}
+
+        {% for p in paginator.page_range %}
+		{% if page_obj.number == p %}
+        <li class="page-num page-num-selected">{{ p }}</li>
+		{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+        <li class="page-num">
+            <a href="?page={{ p }}">{{ p }}</a>
+        </li>
+		{% endif %}
+        {% endfor %}
+
+{% if page_obj.has_next %}
+<li class="page-num">
+	<a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+</li>
+{% endif %}
+
+    </ul>
+</nav>
+{% endif %}
+
+        </div>
+		  {% endblock %}
+      </div>
+    </section>
+    <!-- end of blog -->
+
+    <!-- about -->
+    <section class = "about" id = "about">
+      <div class = "container">
+        <div class = "about-content">
+          <div>
+            <img src = "{% static 'article/images/vangog.jpg' %}" alt = "">
+          </div>
+          <div class = "about-text">
+            <div class = "title">
+              <h2>Vincent van Gogh</h2>
+              <p>„Я мечтаю о своей картине, а потом я рисую свою мечту.“</p>
+            </div>
+            <p>Винсент Ван Гог (Vincent van Gogh) - один из самых известных художников всех времен, родился в 1853 году в Нидерландах и умер в 1890 году во Франции. Его работы отличаются уникальным стилем и яркой экспрессией.
+              Ван Гог начал свою карьеру художника довольно поздно, в возрасте 27 лет, и всего за 10 лет создал около 900 картин и более чем 1000 рисунков. Среди его наиболее известных работ - "Звездная ночь", "Кошки", "Комната в Арле", "Пшеничное поле с воронами" и многие другие.
+              Ван Гог был известен своей неустойчивой психической состоянием, которое проявлялось в бурных эмоциях и необычайных идеях. В конце своей жизни он страдал от депрессии и был госпитализирован в психиатрическую клинику во Франции, где и умер от ранения, нанесенного им самим.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- end of about -->
+
+    <!-- footer -->
+    <footer>
+      <div class = "social-links">
+        <a href = "#"><i class = "fab fa-facebook-f"></i></a>
+        <a href = "#"><i class = "fab fa-twitter"></i></a>
+        <a href = "#"><i class = "fab fa-instagram"></i></a>
+        <a href = "#"><i class = "fab fa-pinterest"></i></a>
+      </div>
+      <span>Art.Design Blog Page</span>
+    </footer>
+    <!-- end of footer -->
+
+
+  </body>
+</html>
