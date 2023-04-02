@@ -1,0 +1,7 @@
+{% for s in styles %}
+	{% if s.pk == style_selected %}
+		<li class="selected">{{s.name}}</li>
+	{% else %}
+		<li><a href="{{ s.get_absolute_url }}">{{s.name}}</a></li>
+	{% endif %}
+{% endfor %}
