@@ -1,0 +1,70 @@
+{% load static %}
+{% load article_tags %}
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/main.html">
+<head>
+    <meta charset="UTF-8">
+    <title>profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link type="text/css" href="{% static 'article/css/bas.css' %}" rel="stylesheet" />
+</head>
+<!-- header -->
+    <header>
+      <nav class = "navbar">
+        <div class = "container">
+          <a href = "/" class = "navbar-brand">Art&Clue</a>
+         <div class = "navbar-nav">
+            <a href = "/addpage">ADD ARTICLE</a>
+            <a href = "">home</a>
+             {% if request.user.is_authenticated %}
+				<a class="last"> {{user.username}}  <a href="{% url 'logout' %}">Выйти</a></a>
+				{% else %}
+				<a class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></a>
+				{% endif %}
+
+          </div>
+        </div>
+      </nav>
+    </header>
+<body>
+
+
+
+
+<div class="container" style="margin-top: 100px; margin-bottom: 300px;">
+    <div class="container" style="display: flex; flex-direction:row;">
+        <div style="margin-left:150px;"><h2 class="text-left">{{user.username}}</h2>
+            <p>__________________________________________________________________________________________</p>
+            <h7>Email</h7>
+            <p>{{user.email}} </p>
+            <p>__________________________________________________________________________________________</p>
+            <h7>NICKNAME</h7>
+            <p>Nickname </p>
+            <p>__________________________________________________________________________________________</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+    <!-- footer -->
+    <footer>
+      <div class = "social-links">
+        <a href = "#"><i class = "fab fa-facebook-f"></i></a>
+        <a href = "#"><i class = "fab fa-twitter"></i></a>
+        <a href = "#"><i class = "fab fa-instagram"></i></a>
+        <a href = "#"><i class = "fab fa-pinterest"></i></a>
+      </div>
+      <span>Art.Design Blog Page</span>
+    </footer>
+    <!-- end of footer -->
+</body>
+</html>

@@ -14,9 +14,11 @@ class Article(models.Model):
 def __str__(self):
     return self.title
 
+
 class Styles(models.Model):
     style_name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True)
+
 
 class Users(models.Model):
     name = models.CharField(max_length=50, db_index=True)
@@ -25,8 +27,10 @@ class Users(models.Model):
     avatar = models.ImageField(upload_to="photos/avatars/%Y/%m/%d/")
     role = models.ForeignKey("Roles", on_delete=models.PROTECT)
 
+
 class Roles(models.Model):
     role_name = models.CharField(max_length=30, db_index=True)
+
 
 class Comments(models.Model):
     comment_text = models.TextField(db_index=True)
@@ -34,5 +38,3 @@ class Comments(models.Model):
     user = models.ForeignKey("Users", on_delete=models.PROTECT)
     create_time = models.DateTimeField(auto_now_add=True)
     parent_comment = models.ForeignKey("Comments", on_delete=models.PROTECT)
-
-
