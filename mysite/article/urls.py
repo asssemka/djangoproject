@@ -7,6 +7,7 @@ from .views import *
 urlpatterns = [
     # path('', cache_page(60)(ArticleHome.as_view()), name='home'),
     path('', ArticleHome.as_view(), name='home'),
+    path('article/<slug:article_slug>/', ShowArticle.as_view(), name="show_article"),
     path('addpage/', AddPage.as_view(), name='add_page'),
     path('about/', about, name='about'),
     path('contact/', ContactFormView.as_view(), name='contact'),

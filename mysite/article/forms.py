@@ -13,10 +13,11 @@ class AddPostForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['style'].empty_label = "Категория не выбрана"
+        self.fields['painter'].empty_label = "Художник не выбран"
 
     class Meta:
         model = Article
-        fields = ['title', 'slug', 'content', 'photo', 'is_published', 'style']
+        fields = ['title', 'slug', 'content', 'photo', 'is_published', 'style', 'painter']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
             'content': forms.Textarea(attrs={'cols': 60, 'rows': 10}),

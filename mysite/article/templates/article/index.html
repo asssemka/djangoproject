@@ -26,7 +26,6 @@
 				{% else %}
 				<a class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></a>
 				{% endif %}
-
           </div>
         </div>
       </nav>
@@ -153,11 +152,12 @@
             <div class = "blog-text">
               <span>{{a.time_create}}</span>
               <h2>{{a.title}}</h2>
-              <h4>{{a.style.style_name}}</h4>
-				{% autoescape on %}
-              <p>{{a.content|linebreaks|truncatewords:50}}</p>
-				{% endautoescape %}
-              <a href = "{{a.get_absolute_url }}"> Read More</a>
+              <h3>{{a.painter}}</h3>
+              <h4>{{a.style}}</h4>
+<!--				{% autoescape on %}-->
+<!--              <p>{{a.content|linebreaks|truncatewords:50}}</p>-->
+<!--				{% endautoescape %}-->
+              <a  href="article/{{ a.slug }}/"> Read More</a>
             </div>
           </div>
           <!-- end of item -->

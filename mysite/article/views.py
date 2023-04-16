@@ -3,12 +3,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
+from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework import generics
+from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
+from .serializers import ArticleSerializer, PainterSerializer
 
 from .models import *
 from .forms import *
@@ -48,20 +54,17 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
+class ShowArticle(DataMixin, DetailView):
+    model = Article
+    template_name = 'article/article.html'
+    slug_url_kwarg = 'article_slug'
+    context_object_name = 'article'
 
-
-# class ShowPost(DataMixin, DetailView):
-#     model = Article
-#     template_name = 'article/post.html'
-#     slug_url_kwarg = 'post_slug'
-#     context_object_name = 'post'
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         c_def = self.get_user_context(title=context['post'])
-#         return dict(list(context.items()) + list(c_def.items()))
-
-
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        g_def = self.get_user_context(title=context['article'])
+        # user = self.request.user
+        return dict(list(context.items()) + list(g_def.items()))
 
 
 class RegisterUser(DataMixin, CreateView):
@@ -106,7 +109,6 @@ class ContactFormView(DataMixin, FormView):
         return redirect('home')
 
 
-
 class LoginUser(DataMixin, LoginView):
     form_class = LoginUserForm
     template_name = 'article/login.html'
@@ -123,3 +125,99 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+class ArticleAPIView(APIView):
+    def get(self, request):
+        a = Article.objects.all()
+        return Response({'posts': ArticleSerializer(a, many=True).data})
+
+    def post(self, request):
+        serializer = ArticleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        serializer = ArticleSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({'post': serializer.data})
+
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method PUT not allowed"})
+
+        try:
+            instance = Article.objects.get(pk=pk)
+        except:
+            return Response({"error": "Object does not exists"})
+
+        serializer = ArticleSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"post": serializer.data})
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method DELETE not allowed"})
+
+        try:
+            article = Article.objects.get(pk=pk)
+            article.delete()
+        except:
+            return Response({"error": "Object does not exists"})
+
+        return Response({"post": "delete post " + str(pk)})
+
+# class ArticleAPIView(generics.ListAPIView):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerializer
+
+
+# class PaintersAPIView(generics.ListAPIView):
+#     queryset = Painters.objects.all()
+#     serializer_class = PainterSerializer
+
+class PaintersAPIView(APIView):
+    def get(self, request):
+        p = Painters.objects.all()
+        return Response({'posts': PainterSerializer(p, many=True).data})
+
+    def post(self, request):
+        serializer = PainterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        serializer = PainterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response({'post': serializer.data})
+
+    def put(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method PUT not allowed"})
+
+        try:
+            instance = Painters.objects.get(pk=pk)
+        except:
+            return Response({"error": "Object does not exists"})
+
+        serializer = PainterSerializer(data=request.data, instance=instance)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({"post": serializer.data})
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get("pk", None)
+        if not pk:
+            return Response({"error": "Method DELETE not allowed"})
+
+        try:
+            painter = Painters.objects.get(pk=pk)
+            painter.delete()
+        except:
+            return Response({"error": "Object does not exists"})
+
+        return Response({"post": "delete post " + str(pk)})

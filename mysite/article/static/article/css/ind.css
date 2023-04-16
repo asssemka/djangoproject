@@ -5,7 +5,7 @@
     --Quicksand: 'Quicksand', sans-serif;
     --Roboto: 'Roboto', sans-serif;
     --dark: #3c393d;
-    --exDark: #2b2b2b;
+    --exDark: #e7cc3d;
 }
 *{
     padding: 0;
@@ -30,7 +30,11 @@ img{
 header{
     min-height: 100vh;
     /*background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));*/
-    background-image: url("../images/iop.jpg");
+    background-image: url("../images/oioi.jpg");
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
@@ -40,7 +44,7 @@ header{
     padding: 1.2rem;
 }
 .navbar-brand{
-    color: #fff;
+    color: #ffffff;
     font-size: 2rem;
     display: block;
     text-align: center;
@@ -73,7 +77,7 @@ header{
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: #fff;
+    color: #032436;
 }
 .banner-title{
     font-size: 3rem;

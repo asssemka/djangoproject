@@ -1,0 +1,24 @@
+{% block content %}
+
+<div>
+    <div>
+        <h1>{{article.title}}</h1>
+    </div>
+    <div class="book-content">
+        <div>
+            <img class="book_image" src="{{article.photo.url}}">
+        </div>
+        <div class="book-description">
+            <div>
+                <span class="bold-text">Style:</span> {{article.style.style_name}}
+            </div>
+            <div>
+                <span class="bold-text">Год выпуска:</span> {{article.is_published}}
+            </div>
+            <div>
+                {{article.content|linebreaks}}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
