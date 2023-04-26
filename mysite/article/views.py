@@ -12,11 +12,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework import generics, viewsets, mixins
 from django.shortcuts import render
 from rest_framework.decorators import action
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.authentication import TokenAuthentication
 
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
 
 from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from .serializers import ArticleSerializer
@@ -153,19 +155,27 @@ def logout_user(request):
 #         painter = Painters.objects.get(pk=pk)
 #         return Response({'painter': painter.painter_name})
 
+class ArticleAPIListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 2
+
+
 class ArticleAPIList(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    pagination_class = ArticleAPIListPagination
 
 
 class ArticleAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
+    # authentication_classes = (TokenAuthentication, )
 
 
 class ArticleAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = (IsAdminOrReadOnly, )
+    permission_classes = (IsAdminOrReadOnly,)

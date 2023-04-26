@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework import routers
 
 from article import views
 from article.views import *
 from mysite import settings
 from rest_framework import routers
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 # class MyCustomRouter(routers.SimpleRouter):
 #     routes = [
@@ -62,8 +62,13 @@ urlpatterns = [
     path('api/v1/article/', ArticleAPIList.as_view()),
     path('api/v1/article/<int:pk>/', ArticleAPIUpdate.as_view()),
     path('api/v1/articledelete/<int:pk>/', ArticleAPIDestroy.as_view()),
-    #path('api/v1/', include(router.urls)),  # http://127.0.0.1:8000/api/v1/women/
-
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    # path('api/v1/', include(router.urls)),  # http://127.0.0.1:8000/api/v1/women/
 
 ]
 
