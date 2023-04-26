@@ -9,12 +9,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import generics
+from rest_framework import generics, viewsets, mixins
 from django.shortcuts import render
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import GenericViewSet
 
-from .serializers import ArticleSerializer, PainterSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from .serializers import ArticleSerializer
 
 from .models import *
 from .forms import *
@@ -127,97 +132,40 @@ def logout_user(request):
     return redirect('login')
 
 
-class ArticleAPIView(APIView):
-    def get(self, request):
-        a = Article.objects.all()
-        return Response({'posts': ArticleSerializer(a, many=True).data})
-
-    def post(self, request):
-        serializer = ArticleSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        serializer = ArticleSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'post': serializer.data})
-
-    def put(self, request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"error": "Method PUT not allowed"})
-
-        try:
-            instance = Article.objects.get(pk=pk)
-        except:
-            return Response({"error": "Object does not exists"})
-
-        serializer = ArticleSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({"post": serializer.data})
-
-    def delete(self, request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"error": "Method DELETE not allowed"})
-
-        try:
-            article = Article.objects.get(pk=pk)
-            article.delete()
-        except:
-            return Response({"error": "Object does not exists"})
-
-        return Response({"post": "delete post " + str(pk)})
-
-# class ArticleAPIView(generics.ListAPIView):
-#     queryset = Article.objects.all()
+# class ArticleViewSet(mixins.CreateModelMixin,
+#                      mixins.RetrieveModelMixin,
+#                      mixins.UpdateModelMixin,
+#                      mixins.ListModelMixin,
+#                      GenericViewSet):
+#     #queryset = Article.objects.all()
 #     serializer_class = ArticleSerializer
+#
+#     def get_queryset(self):
+#         return Article.objects.all()[:3]
+#
+#     @action(methods=['get'], detail=True)
+#     def style(self, request, pk=None):
+#         style = Styles.objects.get(pk=pk)
+#         return Response({'style': style.style_name})
+#
+#     @action(methods=['get'], detail=True)
+#     def painter(self, request, pk=None):
+#         painter = Painters.objects.get(pk=pk)
+#         return Response({'painter': painter.painter_name})
+
+class ArticleAPIList(generics.ListCreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
 
-# class PaintersAPIView(generics.ListAPIView):
-#     queryset = Painters.objects.all()
-#     serializer_class = PainterSerializer
+class ArticleAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
-class PaintersAPIView(APIView):
-    def get(self, request):
-        p = Painters.objects.all()
-        return Response({'posts': PainterSerializer(p, many=True).data})
 
-    def post(self, request):
-        serializer = PainterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        serializer = PainterSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'post': serializer.data})
-
-    def put(self, request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"error": "Method PUT not allowed"})
-
-        try:
-            instance = Painters.objects.get(pk=pk)
-        except:
-            return Response({"error": "Object does not exists"})
-
-        serializer = PainterSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response({"post": serializer.data})
-
-    def delete(self, request, *args, **kwargs):
-        pk = kwargs.get("pk", None)
-        if not pk:
-            return Response({"error": "Method DELETE not allowed"})
-
-        try:
-            painter = Painters.objects.get(pk=pk)
-            painter.delete()
-        except:
-            return Response({"error": "Object does not exists"})
-
-        return Response({"post": "delete post " + str(pk)})
+class ArticleAPIDestroy(generics.RetrieveDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerializer
+    permission_classes = (IsAdminOrReadOnly, )
