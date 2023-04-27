@@ -1,0 +1,15 @@
+{% load static %}
+{% load article_tags %}
+
+{% block content %}
+<link type="text/css" href="{% static 'article/css/ind.css' %}" rel="stylesheet"/><div class="edit-profile-form">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <button type="submit" class="save-profile">Сохранить</button>
+    </form>
+</div>
+
+
+{% endblock %}
