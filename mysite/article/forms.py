@@ -42,7 +42,6 @@ class RegisterUserForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2')
 
 
-
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
@@ -52,7 +51,16 @@ class ContactForm(forms.Form):
     name = forms.CharField(label='Имя', max_length=255)
     email = forms.EmailField(label='Email')
     content = forms.CharField(widget=forms.Textarea(attrs={'cols': 60, 'rows': 10}))
-    capatcha = CaptchaField()
+    captcha = CaptchaField(label='captcha-widget')
 
 
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comments
+        fields = ('comment_text',)
+        widgets = {
+            'comment_text': forms.Textarea(attrs={'placeholder': 'Введите комментарий', 'class': 'input-comment'}),
+        }
 

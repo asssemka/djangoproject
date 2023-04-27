@@ -4,8 +4,8 @@
     --Playfair: 'Playfair Display', serif;
     --Quicksand: 'Quicksand', sans-serif;
     --Roboto: 'Roboto', sans-serif;
-    --dark: #3c393d;
-    --exDark: #d9d1d1;
+    --dark: #21738a;
+    --exDark: rgba(169, 164, 164, 0.86);
 }
 *{
     padding: 0;
@@ -33,8 +33,9 @@ img{
 /*    justify-content: stretch;*/
 /*}*/
 .navbar{
-    background: rgba(0, 0, 0, 0.6);
+    background: rgb(74, 141, 185);
     padding: 1.2rem;
+
 }
 .navbar-brand{
     color: #fff;
@@ -247,6 +248,41 @@ img{
 .blog-text a:hover{
     background: var(--exDark);
 }
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+input[type="file"] {
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #3287b9;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #6495ed;
+}
+
+.form-error {
+  color: red;
+  margin-bottom: 10px;
+}
 
 /* about */
 .about{
@@ -260,6 +296,124 @@ img{
     padding: 0.6rem 0;
     opacity: 0.8;
 }
+.container {
+  margin-top: 70px;
+}
+
+/* Стили для блока profile */
+.profile {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* Стили для блока user-profile */
+.user-profile {
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  width: 600px;
+}
+
+/* Стили для блока user-info */
+.user-info {
+  margin-top: 10px;
+}
+
+.firstname-lastname {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nickname {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #555;
+}
+
+.article-content {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+margin: 50px 0;
+}
+
+.article-description {
+width: 50%;
+}
+
+.article_image {
+width: 100%;
+max-width: 600px;
+}
+
+.bold-text {
+font-weight: bold;
+}
+
+/* Стиль для лайка */
+
+.like-button {
+display: inline-block;
+width: 50px;
+height: 50px;
+background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-512.png");
+background-repeat: no-repeat;
+background-size: contain;
+cursor: pointer;
+}
+
+/* Стили для формы комментариев */
+form {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f6f6f6;
+  border-radius: 5px;
+}
+
+form input[type="text"] {
+  display: block;
+  width: 200px;
+  padding: 10px;
+  border: none;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+form .submit-comment {
+  background-color: #2196F3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Стили для блока комментариев */
+.one-comment {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.one-comment .user-and-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.one-comment .user-and-text .user-comment {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.one-comment .user-and-text .text-comment {
+  background-color: #f6f6f6;
+  padding: 10px;
+  border-radius: 5px;
+  line-height: 1.5;
+}
 
 /* footer */
 footer{
@@ -267,6 +421,13 @@ footer{
     color: #fff;
     text-align: center;
     padding: 2rem 0;
+    margin-top: 50px;
+    position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+
 }
 .social-links{
     display: flex;
@@ -301,6 +462,11 @@ footer{
 .form-input {
     width: 300px;
     font-size: 16px;
+}
+
+.captcha-widget img {
+    width: 100px;
+    height: 50px;
 }
 
 .form-label {

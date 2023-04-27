@@ -18,12 +18,10 @@
         <div class = "container">
           <a href = "/" class = "navbar-brand">Art&Clue</a>
          <div class = "navbar-nav">
-            <a href = "/addpage">ADD ARTICLE</a>
-            <a href = "">home</a>
              {% if request.user.is_authenticated %}
-				<a class="last"> {{user.username}}  <a href="{% url 'logout' %}">Выйти</a></a>
+				<a class="last"> <a href="{% url 'logout_user_page' %}">Выйти</a></a>
 				{% else %}
-				<a class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></a>
+				<a class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login_user_page' %}">Войти</a></a>
 				{% endif %}
 
           </div>
@@ -35,21 +33,48 @@
 
 
 
-<div class="container" style="margin-top: 100px; margin-bottom: 300px;">
-    <div class="container" style="display: flex; flex-direction:row;">
-        <div style="margin-left:150px;"><h2 class="text-left">{{user.username}}</h2>
-            <p>__________________________________________________________________________________________</p>
-            <h7>Email</h7>
-            <p>{{user.email}} </p>
-            <p>__________________________________________________________________________________________</p>
-            <h7>NICKNAME</h7>
-            <p>Nickname </p>
-            <p>__________________________________________________________________________________________</p>
+<!--<div class="container" style="margin-top: 100px; margin-bottom: 300px;">-->
+<!--    <div class="container" style="display: flex; flex-direction:row;">-->
+<!--        <div style="margin-left:150px;"><h2 class="text-left">{{user.username}}</h2>-->
+<!--            <img src="{{user.avatar.url}}">-->
+<!--            <p>__________________________________________________________________________________________</p>-->
+<!--            <h7>Email</h7>-->
+<!--            <p>{{user.email}} </p>-->
+<!--            <p>__________________________________________________________________________________________</p>-->
+<!--            <h7>NICKNAME</h7>-->
+<!--            <p>{{nickname}} </p>-->
+<!--            <p>__________________________________________________________________________________________</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+{% block content %}
+
+<div class="profile">
+    <div class="user-profile">
+        <div class="user-info">
+            {% if user.last_name and user.last_name %}
+            <div class="firstname-lastname">
+                {{user.first_name}} {{user.last_name}}
+            </div>
+            {% endif %}
+            <h5>NICKNAME</h5>
+            <div class="nickname">
+                @{{user.username}}
+            </div> <br>
+            <h5>EMAIL</h5>
+            <div class="nickname">
+                {{user.email}}
+            </div>
         </div>
     </div>
+
+
 </div>
 
-
+{% endblock %}
 
 
 

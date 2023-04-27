@@ -365,6 +365,42 @@ footer{
 	box-shadow: none;
 }
 
+.list-genres {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.genre-name {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.genre-name.selected {
+  background-color: #8ab73a;
+  color: #fff;
+}
+
+.genre-name a {
+  color: #333;
+  text-decoration: none;
+}
+
+.genre-name a:hover {
+  text-decoration: underline;
+}
+
 
 /* Media Queries */
 @media screen and (min-width: 540px){
@@ -423,4 +459,17 @@ footer{
     .design-content{
         grid-template-columns: repeat(3, 1fr);
     }
+}
+
+.firstname-lastname {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.nickname, .user-age{
+    font-size: 20px;
+}
+
+.edit-profile{
+    margin-top: 6vw;
 }

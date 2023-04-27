@@ -17,15 +17,13 @@
       <nav class = "navbar">
         <div class = "container">
           <a href = "/" class = "navbar-brand">Art&Clue</a>
-          <div class = "navbar-nav">
-            <a href = "/addpage">ADD ARTICLE</a>
-          </div>
         </div>
       </nav>
 </header>
 <body>
+<h1 style="color: white">QWERTYUIOP</h1>
 {% block content %}
-<h1>{{title}}</h1>
+<!--<h3 style="color: #333671; text-align: center">{{title}}</h3>-->
 
 <form action="{% url 'add_page' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}

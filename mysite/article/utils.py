@@ -10,11 +10,11 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
 class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
-        style = cache.get('style')
+        styles = cache.get('styles')
         # style = Styles.objects.annotate(Count('article'))
-        if not style:
-            style = Styles.objects.annotate(Count('article'))
-            cache.set('style', style, 60)
+        if not styles:
+            styles = Styles.objects.annotate(Count('article'))
+            cache.set('styles', styles, 60)
 
         user_menu = menu.copy()
         if not self.request.user.is_authenticated:
@@ -22,7 +22,7 @@ class DataMixin:
 
         context['menu'] = user_menu
 
-        context['style'] = style
+        context['styles'] = styles
         if 'style_selected' not in context:
             context['style_selected'] = 0
         return context

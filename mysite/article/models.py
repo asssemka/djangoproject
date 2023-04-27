@@ -1,4 +1,8 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
+
+from mysite import settings
 
 
 class Article(models.Model):
@@ -23,14 +27,21 @@ class Styles(models.Model):
     def __str__(self):
         return self.style_name
 
+    def get_absolute_url(self):
+        return reverse('style', kwargs={'style_slug': self.slug})
 
-class Users(models.Model):
-    name = models.CharField(max_length=50, db_index=True)
-    surname = models.CharField(max_length=50)
-    password = models.CharField(max_length=50)
+
+class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to="photos/avatars/%Y/%m/%d/")
-    role = models.ForeignKey("Roles", on_delete=models.PROTECT)
-    slug = models.SlugField(max_length=255, unique=True, db_index=True)
+    # role = models.ForeignKey("Roles", on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.username
+
+    def get_absolute_url(self):
+        return reverse('user', kwargs={'username': self.username})
+
+
 
 
 class Roles(models.Model):
@@ -40,9 +51,13 @@ class Roles(models.Model):
 class Comments(models.Model):
     comment_text = models.TextField(db_index=True)
     article = models.ForeignKey("Article", on_delete=models.PROTECT)
-    user = models.ForeignKey("Users", on_delete=models.PROTECT)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
     create_time = models.DateTimeField(auto_now_add=True)
-    parent_comment = models.ForeignKey("Comments", on_delete=models.PROTECT)
+    # parent_comment = models.ForeignKey("Comments", on_delete=models.PROTECT)
+
+
+    def __str__(self):
+        return self.comment_text
 
 
 class Painters(models.Model):
@@ -53,3 +68,9 @@ class Painters(models.Model):
 
     def __str__(self):
         return self.painter_name
+
+
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)

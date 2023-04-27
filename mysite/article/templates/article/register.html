@@ -18,12 +18,10 @@
         <div class = "container">
           <a href = "/" class = "navbar-brand">Art&Clue</a>
           <div class = "navbar-nav">
-            <a href = "/addpage">ADD ARTICLE</a>
-            <a href = "">home</a>
              {% if request.user.is_authenticated %}
-				<a class="last"> {{user.username}}  <a href="{% url 'logout' %}">Выйти</a></a>
+				<a class="last"> {{user.username}}  <a href="{% url 'logout_user_page' %}">Выйти</a></a>
 				{% else %}
-				<a class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></a>
+				<a class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login_user_page' %}">Войти</a></a>
 				{% endif %}
 
           </div>
