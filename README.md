@@ -1,3 +1,1 @@
-https://www.canva.com/design/DAFaXqTfxZs/4ylDjFh326vF28ACOBDUSg/view?utm_content=DAFaXqTfxZs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton 
-
-Папка lab1 содержит в себе лабораторные работы #1 и #2, до этого я отправляла все лабораторные работы по веткам.
+https://www.canva.com/design/DAFzlsKlEtw/xmO0EqxZyedYan31hcV1-Q/edit?utm_content=DAFzlsKlEtw&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
